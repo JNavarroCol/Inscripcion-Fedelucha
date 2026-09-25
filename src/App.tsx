@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Deportista, ResponsibleData } from './types';
-import { SAMPLE_RESPONSIBLE, SAMPLE_DEPORTISTAS } from './data/sampleAthletes';
 import { ResponsibleForm } from './components/ResponsibleForm';
 import { AthletesTable } from './components/AthletesTable';
 import { AthleteModal } from './components/AthleteModal';
@@ -11,7 +10,6 @@ import {
   FileSpreadsheet,
   Download,
   RotateCcw,
-  Sparkles,
   Trophy,
   ShieldCheck,
   CheckCircle,
@@ -185,19 +183,6 @@ export default function App() {
     showNotification('¡Archivo Excel descargado con éxito!');
   };
 
-  const handleLoadSampleData = () => {
-    if (
-      athletes.length > 0 &&
-      !window.confirm('¿Desea reemplazar los datos actuales con los datos de ejemplo?')
-    ) {
-      return;
-    }
-    setResponsable(SAMPLE_RESPONSIBLE);
-    setAthletes(SAMPLE_DEPORTISTAS);
-    setFormErrors({});
-    showNotification('Se cargaron datos de ejemplo con 4 deportistas');
-  };
-
   const handleResetForm = () => {
     if (
       window.confirm(
@@ -250,16 +235,6 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3">
-              <button
-                type="button"
-                onClick={handleLoadSampleData}
-                className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 transition-colors cursor-pointer"
-                title="Cargar datos de prueba para demostración rápida"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>Cargar Ejemplo</span>
-              </button>
-
               <button
                 type="button"
                 onClick={handleResetForm}
@@ -315,31 +290,6 @@ export default function App() {
 
       {/* Main Container */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-        {/* Sample data alert banner on empty state */}
-        {athletes.length === 0 && (
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0">
-                <Sparkles className="w-5 h-5 text-amber-300" />
-              </div>
-              <div>
-                <h3 className="text-sm font-bold text-slate-900">
-                  ¿Desea probar el funcionamiento con registros de ejemplo?
-                </h3>
-                <p className="text-xs text-slate-600">
-                  Haga clic para autocompletar con un delegado y 4 deportistas en distintas categorías y modalidades.
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={handleLoadSampleData}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors self-start sm:self-auto shrink-0 cursor-pointer"
-            >
-              Cargar datos de ejemplo
-            </button>
-          </div>
-        )}
-
         {/* Step 1: Responsible Form */}
         <ResponsibleForm
           data={responsable}
