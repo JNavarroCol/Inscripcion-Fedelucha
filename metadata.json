@@ -1,0 +1,6 @@
+{
+  "name": "Inscripción de Deportistas",
+  "description": "Sistema de registro e inscripción de deportistas y delegaciones con exportación a Excel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
